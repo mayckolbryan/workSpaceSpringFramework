@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="personaService" class="com.mitocode.service.PersonaServiceImpl"></bean>
+	<bean id="persona" class="com.mitocode.model.Persona">
+		<!-- <constructor-arg value="1"></constructor-arg>
+		<constructor-arg value="Juan"></constructor-arg>
+		<constructor-arg value="Ramirez"></constructor-arg> -->
+		<property name="id" value="2"></property>
+		<property name="nombres" value="Rodrigo"></property>
+		<property name="apellidos" value="Lara"></property>
+	</bean>
+</beans>
