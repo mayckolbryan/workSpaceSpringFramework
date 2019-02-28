@@ -77,7 +77,7 @@ public class PersonaDAOImpl extends JdbcDaoSupport implements IPersonaDAO{
 		Persona persona = (Persona)getJdbcTemplate().queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<Persona>(Persona.class));
 		return persona;
 	}
-	
+
 	/*@Transactional se utiliza para indicar que el metodo va a funcionar bajo una Transaccion, indicandole el bean de Transaccion.
 	  La Transaccion nos sirve en caso de que suceda algun erroro inconveniente dentro del flujo de ejecucion del metodo, haga un rollback.
 	*/

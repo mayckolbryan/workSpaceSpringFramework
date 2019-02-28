@@ -2,15 +2,32 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<context:component-scan base-package="com.mitocode"/>
 	
+	<!-- Haciendo referencias al archivo ds_config.properties, (classpath indica la raiz de este archivo, ejemplo: src.main.resources). -->
+	<context:property-placeholder location="classpath:properties/ds_config.properties"/>
+	
+	<!-- Se habilita las Transacciones, se necesita del id del bean de la definicion de Transaccion.  -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- <bean id="personaDao" class="com.mitocode.dao.PersonaDAOImpl"></bean> es igual que @Repository-->
+	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver"></property>
-		<property name="url" value="jdbc:postgresql://localhost/crud"></property>
-		<property name="username" value="postgres"></property>
-		<property name="password" value="123"></property>
+		<property name="driverClassName" value="${ds.database-driver}"></property>
+		<property name="url" value="${ds.url}"></property>
+		<property name="username" value="${ds.username}"></property>
+		<property name="password" value="${ds.password}"></property>
+	</bean>
+	
+	<!-- En este bean se define un bean para las Transacciones de Base de Datos, mas no se habilita -->
+	<!-- DataSourceTransactionManager necesita que se le setee la variable datasource pero este setDataSource espera una variablde de tipo
+		 DataSource por lo cual a este bean en su property se le hace una referencia(ref) a otro bean por medio de su id. (ref="dataSource")-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 </beans>

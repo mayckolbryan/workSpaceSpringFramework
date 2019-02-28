@@ -1,6 +1,8 @@
 package com.mitocode;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mitocode.model.Persona;
@@ -15,7 +17,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         IPersonaService service = context.getBean(PersonaServiceImpl.class);
         
         Persona persona = new Persona();
@@ -29,6 +31,6 @@ public class App
 //			System.out.println(fila);
 //		}
         
-        service.delete(29);
+        service.delete(31);
     }
 }

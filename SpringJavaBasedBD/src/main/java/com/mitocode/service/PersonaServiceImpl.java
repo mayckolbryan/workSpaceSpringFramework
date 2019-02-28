@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mitocode.dao.IPersonaDAO;
 import com.mitocode.model.Persona;
@@ -18,7 +17,6 @@ import com.mitocode.model.Persona;
  */
 //@Service es un estereotipo que le indica a spring que es una clase de representacion de una lógica. (Esteoritipo Service)
 @Service
-//@Transactional("transactionManager") , tambien se puede colocar a este nivel para englobar toda esta clase.
 public class PersonaServiceImpl implements IPersonaService{
 	
 	//@Autowired busca e inyecta la instancia a la variable, la busqueda lo hace dentro del core container.
@@ -26,8 +24,6 @@ public class PersonaServiceImpl implements IPersonaService{
 	@Autowired
 	private IPersonaDAO dao;
 	
-	//Se puede utilizar la etiqueta @Transactional a nivel de la capa del Service si se desea que varios metodos del DAO sean Transaccionales.
-	//@Transactional("transactionManager")
 	@Override
 	public void create(Persona persona) {
 		dao.create(persona);
