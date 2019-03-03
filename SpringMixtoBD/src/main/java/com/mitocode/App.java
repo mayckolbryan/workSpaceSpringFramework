@@ -25,10 +25,10 @@ public class App
         
 //        service.create(persona);
         
-//        for (Persona fila : service.listAll()) {
-//			System.out.println(fila);
-//		}
+        for (Persona fila : service.listAll()) {
+			System.out.println(fila);
+		}
         
-        service.delete(29);
+//        service.delete(29);
     }
 }
